@@ -1,0 +1,159 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "ClickstreamEvent",
+    "type": "object",
+    "required": [
+        "event_id",
+        "session_id",
+        "user_id",
+        "event_type",
+        "event_timestamp",
+        "platform",
+        "marketing_channel"
+    ],
+    "properties": {
+        "event_id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "session_id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "user_id": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "anonymous_id": {
+            "type": "string"
+        },
+        "event_type": {
+            "type": "string",
+            "enum": [
+                "page_view",
+                "search_filter",
+                "product_view",
+                "add_to_cart",
+                "remove_from_cart",
+                "checkout_start",
+                "purchase",
+                "session_exit"
+            ]
+        },
+        "event_timestamp": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "platform": {
+            "type": "string",
+            "enum": [
+                "web",
+                "ios",
+                "android"
+            ]
+        },
+        "device_info": {
+            "type": "object",
+            "properties": {
+                "user_agent": {
+                    "type": "string"
+                },
+                "ip_address": {
+                    "type": "string"
+                },
+                "screen_resolution": {
+                    "type": "string"
+                },
+                "geo_country": {
+                    "type": "string"
+                }
+            }
+        },
+        "marketing_channel": {
+            "type": "string",
+            "enum": [
+                "organic",
+                "cpc",
+                "social",
+                "email",
+                "affiliate",
+                "direct"
+            ]
+        },
+        "campaign": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "page_context": {
+            "type": "object",
+            "properties": {
+                "page_url": {
+                    "type": "string"
+                },
+                "page_category": {
+                    "type": "string"
+                },
+                "dwell_time_ms": {
+                    "type": "integer"
+                }
+            }
+        },
+        "product_data": {
+            "type": [
+                "object",
+                "null"
+            ],
+            "properties": {
+                "product_id": {
+                    "type": "string"
+                },
+                "product_name": {
+                    "type": "string"
+                },
+                "category": {
+                    "type": "string"
+                },
+                "unit_price": {
+                    "type": "number"
+                },
+                "quantity": {
+                    "type": "integer"
+                }
+            }
+        },
+        "order_data": {
+            "type": [
+                "object",
+                "null"
+            ],
+            "properties": {
+                "order_id": {
+                    "type": "string"
+                },
+                "cart_total": {
+                    "type": "number"
+                },
+                "item_count": {
+                    "type": "integer"
+                },
+                "discount_code": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            }
+        },
+        "anomaly_label": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "description": "Ground truth flag injected by generator for validation (e.g. 'bot_loop', 'cart_abandonment', 'promo_surge')"
+        }
+    }
+}
